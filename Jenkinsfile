@@ -1,20 +1,17 @@
 pipeline {
     agent any
-
     environment {
         DOCKER_IMAGE = "your-registry/app:latest"
         DOCKER_REGISTRY = "your-registry"
         MANIFEST_REPO = "git@github.com:your-org/app-manifest-repo.git"
         ARGOCD_APP = "your-app"
     }
-
     stages {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', credentialsId: 'github-cred', url: 'https://github.com/RaamHorakeri/simple-calculator.git'
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -22,15 +19,13 @@ pipeline {
                 }
             }
         }
-
-        stage('Push to Docker Registry') {
+       stage('Push to Docker Registry') {
             steps {
                 withDockerRegistry([credentialsId: 'docker-cred', url: "https://$DOCKER_REGISTRY"]) {
                     sh "docker push $DOCKER_IMAGE"
                 }
             }
         }
-
         stage('Update Kubernetes Manifests') {
             steps {
                 script {
@@ -47,7 +42,6 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy via ArgoCD') {
             steps {
                 sh "argocd app sync $ARGOCD_APP"
