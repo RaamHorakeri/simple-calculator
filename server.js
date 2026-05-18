@@ -1,74 +1,45 @@
-// Calculator route
-app.post('/calculate', (req, res) => {
-    const { num1, operator, num2 } = req.body;
-    let result;
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-    if (!num1 || !num2 || isNaN(num1) || isNaN(num2)) {
-        return res.render('index', { result: 'Invalid numbers.', num1, operator, num2 });
-    }
+const app = express();
 
-    const n1 = parseFloat(num1);
-    const n2 = parseFloat(num2);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    switch (operator) {
-        case '+':
-            result = n1 + n2;
-            break;
-        case '-':
-            result = n1 - n2;
-            break;
-        case '*':
-            result = n1 * n2;
-            break;
-        case '/':
-            result = n2 === 0 ? 'Cannot divide by zero.' : n1 / n2;
-            break;
-        default:
-            result = 'Invalid operator.';
-    }
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-    res.render('index', { result, num1, operator, num2 });
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
 });
 
-export default app;// Calculator route
-app.post('/calculate', (req, res) => {
-    const { num1, operator, num2 } = req.body;
-    let result;
-
-    if (!num1 || !num2 || isNaN(num1) || isNaN(num2)) {
-        return res.render('index', { result: 'Invalid numbers.', num1, operator, num2 });
-    }
-
-    const n1 = parseFloat(num1);
-    const n2 = parseFloat(num2);
-
-    switch (operator) {
-        case '+':
-            result = n1 + n2;
-            break;
-        case '-':
-            result = n1 - n2;
-            break;
-        case '*':
-            result = n1 * n2;
-            break;
-        case '/':
-            result = n2 === 0 ? 'Cannot divide by zero.' : n1 / n2;
-            break;
-        default:
-            result = 'Invalid operator.';
-    }
-
-    res.render('index', { result, num1, operator, num2 });
+app.get('/', (req, res) => {
+    res.render('index', {
+        result: null,
+        num1: '',
+        operator: '',
+        num2: ''
+    });
 });
 
-export default app;// Calculator route
 app.post('/calculate', (req, res) => {
     const { num1, operator, num2 } = req.body;
+
     let result;
 
     if (!num1 || !num2 || isNaN(num1) || isNaN(num2)) {
-        return res.render('index', { result: 'Invalid numbers.', num1, operator, num2 });
+        return res.render('index', {
+            result: 'Invalid numbers.',
+            num1,
+            operator,
+            num2
+        });
     }
 
     const n1 = parseFloat(num1);
@@ -85,141 +56,20 @@ app.post('/calculate', (req, res) => {
             result = n1 * n2;
             break;
         case '/':
-            result = n2 === 0 ? 'Cannot divide by zero.' : n1 / n2;
+            result = n2 === 0
+                ? 'Cannot divide by zero.'
+                : n1 / n2;
             break;
         default:
             result = 'Invalid operator.';
     }
 
-    res.render('index', { result, num1, operator, num2 });
-});
-
-export default app;// Calculator route
-app.post('/calculate', (req, res) => {
-    const { num1, operator, num2 } = req.body;
-    let result;
-
-    if (!num1 || !num2 || isNaN(num1) || isNaN(num2)) {
-        return res.render('index', { result: 'Invalid numbers.', num1, operator, num2 });
-    }
-
-    const n1 = parseFloat(num1);
-    const n2 = parseFloat(num2);
-
-    switch (operator) {
-        case '+':
-            result = n1 + n2;
-            break;
-        case '-':
-            result = n1 - n2;
-            break;
-        case '*':
-            result = n1 * n2;
-            break;
-        case '/':
-            result = n2 === 0 ? 'Cannot divide by zero.' : n1 / n2;
-            break;
-        default:
-            result = 'Invalid operator.';
-    }
-
-    res.render('index', { result, num1, operator, num2 });
-});
-
-export default app;// Calculator route
-app.post('/calculate', (req, res) => {
-    const { num1, operator, num2 } = req.body;
-    let result;
-
-    if (!num1 || !num2 || isNaN(num1) || isNaN(num2)) {
-        return res.render('index', { result: 'Invalid numbers.', num1, operator, num2 });
-    }
-
-    const n1 = parseFloat(num1);
-    const n2 = parseFloat(num2);
-
-    switch (operator) {
-        case '+':
-            result = n1 + n2;
-            break;
-        case '-':
-            result = n1 - n2;
-            break;
-        case '*':
-            result = n1 * n2;
-            break;
-        case '/':
-            result = n2 === 0 ? 'Cannot divide by zero.' : n1 / n2;
-            break;
-        default:
-            result = 'Invalid operator.';
-    }
-
-    res.render('index', { result, num1, operator, num2 });
-});
-
-export default app;// Calculator route
-app.post('/calculate', (req, res) => {
-    const { num1, operator, num2 } = req.body;
-    let result;
-
-    if (!num1 || !num2 || isNaN(num1) || isNaN(num2)) {
-        return res.render('index', { result: 'Invalid numbers.', num1, operator, num2 });
-    }
-
-    const n1 = parseFloat(num1);
-    const n2 = parseFloat(num2);
-
-    switch (operator) {
-        case '+':
-            result = n1 + n2;
-            break;
-        case '-':
-            result = n1 - n2;
-            break;
-        case '*':
-            result = n1 * n2;
-            break;
-        case '/':
-            result = n2 === 0 ? 'Cannot divide by zero.' : n1 / n2;
-            break;
-        default:
-            result = 'Invalid operator.';
-    }
-
-    res.render('index', { result, num1, operator, num2 });
-});
-
-export default app;// Calculator route
-app.post('/calculate', (req, res) => {
-    const { num1, operator, num2 } = req.body;
-    let result;
-
-    if (!num1 || !num2 || isNaN(num1) || isNaN(num2)) {
-        return res.render('index', { result: 'Invalid numbers.', num1, operator, num2 });
-    }
-
-    const n1 = parseFloat(num1);
-    const n2 = parseFloat(num2);
-
-    switch (operator) {
-        case '+':
-            result = n1 + n2;
-            break;
-        case '-':
-            result = n1 - n2;
-            break;
-        case '*':
-            result = n1 * n2;
-            break;
-        case '/':
-            result = n2 === 0 ? 'Cannot divide by zero.' : n1 / n2;
-            break;
-        default:
-            result = 'Invalid operator.';
-    }
-
-    res.render('index', { result, num1, operator, num2 });
+    res.render('index', {
+        result,
+        num1,
+        operator,
+        num2
+    });
 });
 
 export default app;
