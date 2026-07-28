@@ -3,6 +3,10 @@ services:
   app_new:
     container_name: calculator-app-new
     image: web-calculator:latest
+
+    env_file:
+      - ${ENV_FILE}
+      
     ports:
       - "1110:3000"
     restart: always
