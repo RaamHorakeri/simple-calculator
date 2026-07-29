@@ -1,11 +1,11 @@
 version: "3.8"
 services:
-  app_new:
+  web-calculator:
     container_name: web-calculator
     image: web-calculator:latest
 
     env_file:
-      - ${ENV_FILE}
+      - ${WEB-CALCULATER_ENV}
       
     ports:
       - "1110:3000"
