@@ -7,6 +7,8 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const PORT = process.env.PORT || 3000;
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -70,6 +72,11 @@ app.post('/calculate', (req, res) => {
         operator,
         num2
     });
+});
+
+// Start the server
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Web Calculator is running on port ${PORT}`);
 });
 
 export default app;
