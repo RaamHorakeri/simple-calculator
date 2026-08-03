@@ -1,4 +1,4 @@
-version: "10.1"
+version: "10.2"
 services:
   web-calculator:
     container_name: web-calculator
